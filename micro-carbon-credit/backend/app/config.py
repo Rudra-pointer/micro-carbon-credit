@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     """Central configuration for the Micro Carbon Credit API."""
 
     # ── Database ──────────────────────────────────────────────
-    DATABASE_URL: str = "postgresql://neondb_owner:npg_cbmfxuS0XhI8@ep-autumn-leaf-amdy3045.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require"
+    DATABASE_URL: str 
 
     # ── JWT / Auth ────────────────────────────────────────────
     SECRET_KEY: str = "change-me-in-production-to-a-random-256-bit-hex"
