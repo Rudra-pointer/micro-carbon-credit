@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #e9efe4;
+    --green: #00FF88;
+    --teal: #00D4AA;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg);
+    color: white;
+    scroll-behavior: smooth;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white bg-opacity-5 backdrop-blur-xl border border-white border-opacity-10 shadow-xl;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4), 0 0 30px rgba(0, 255, 136, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .neon-glow:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.6), 0 0 50px rgba(0, 255, 136, 0.4);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  }
+}
+
+/* ── Micro-Animations ──────────────────────────── */
+
+/* Button hover: scale + glow intensify */
+button {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: scale(1.03);
+}
+
+/* Card entrance on scroll (used via class) */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Shimmer skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.animate-pulse {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.8s infinite linear;
+}
+
+/* Chart line draw-in */
+.recharts-area-curve,
+.recharts-line-curve {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: draw-line 1.5s ease-out forwards;
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ── Mobile Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Stack sidebar below on mobile */
+  .flex.min-h-screen {
+    flex-direction: column;
+  }
+
+  /* Sidebar becomes top bar */
+  .w-64.min-h-screen {
+    width: 100%;
+    min-height: auto;
+    flex-direction: row;
+    padding: 1rem;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .w-64.min-h-screen nav {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .w-64.min-h-screen .mt-auto {
+    display: none;
+  }
+}
